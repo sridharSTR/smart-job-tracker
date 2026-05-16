@@ -22,7 +22,7 @@
 
 <br/>
 
-[![Demo](https://img.shields.io/badge/▶%20Watch%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/file/d/1CT93uGtsCz8T9aqIskx-DGWaGwVofB7y/view?usp=drivesdk)
+[![Demo](https://img.shields.io/badge/▶%20Watch%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/file/d/1CT93uGtsCz8T9aqIskx-DGWaGwVofB7y/view?usp=sharing)
 
 </div>
 
