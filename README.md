@@ -474,10 +474,10 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,100:a855f7&height=120&section=footer" width="100%"/>
 
-**Built with ❤️ by [sridhar manohar](https://github.com/sridharSTR)**
+**Made by [sridhar manohar](https://github.com/sridharSTR)**
 
 [![GitHub](https://img.shields.io/badge/GitHub-sridharSTR-181717?style=for-the-badge&logo=github)](https://github.com/sridharSTR)
 
-© 2026 Smart Job Tracker — MIT License
+
 
 </div>
