@@ -23,8 +23,6 @@
 <br/>
 
 [![Demo](https://img.shields.io/badge/▶%20Watch%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=VIDEO_ID)
-[![Live App](https://img.shields.io/badge/🚀%20Live%20App-6366f1?style=for-the-badge)](https://your-app.vercel.app)
-[![Docs](https://img.shields.io/badge/📚%20Documentation-f59e0b?style=for-the-badge)](docs/architecture.md)
 
 </div>
 
@@ -91,20 +89,20 @@
 
 ```mermaid
 graph LR
-    subgraph 🖥️ Frontend
-        FE["⚛️ React 18 + Vite\nTailwind CSS"]
+    subgraph Frontend
+        FE["React 18 + Vite\nTailwind CSS"]
     end
 
-    subgraph ⚙️ Backend
-        BE["🐍 Django REST API"]
-        AUTH["🔐 JWT Auth Service"]
-        AI["🤖 Resume Analyzer\n(OpenAI GPT-4o)"]
-        EMAIL["📧 Celery + Redis\nMail Worker"]
+    subgraph Backend
+        BE["Django REST API"]
+        AUTH["JWT Auth Service"]
+        AI["Resume Analyzer\nOpenAI GPT-4o"]
+        EMAIL["Celery + Redis\nMail Worker"]
     end
 
-    subgraph 🗄️ Database
-        PG["🐘 PostgreSQL 16"]
-        RD["⚡ Redis 7\nCache + Queues"]
+    subgraph Database
+        PG["PostgreSQL 16"]
+        RD["Redis 7\nCache + Queues"]
     end
 
     FE -->|"Axios Requests"| BE
@@ -128,13 +126,13 @@ graph LR
 
 ```mermaid
 flowchart TD
-    A([👤 Client]) -->|"POST /api/auth/login"| B[🐍 Auth Service]
-    B -->|"Validate Credentials"| C[(🗄️ PostgreSQL)]
-    C -->|"✅ User Found"| D[🔑 Issue JWT Tokens]
+    A([Client]) -->|"POST /api/auth/login"| B[Auth Service]
+    B -->|"Validate Credentials"| C[(PostgreSQL)]
+    C -->|"User Found"| D[Issue JWT Tokens]
     D -->|"HttpOnly Cookie"| A
-    A -->|"Authenticated Requests"| E[🔒 Protected API]
+    A -->|"Authenticated Requests"| E[Protected API]
     E -->|"Verify Token"| B
-    B -->|"Token Expired"| F[♻️ Refresh Endpoint]
+    B -->|"Token Expired"| F[Refresh Endpoint]
     F -->|"New Access Token"| A
 
     style A fill:#6366f1,color:#fff
@@ -149,14 +147,14 @@ flowchart TD
 
 ```mermaid
 flowchart TB
-    S([📤 User Uploads Resume]) --> AZ[🤖 AI Analyzer]
-    AZ --> MS[📊 Match Score Calculation]
-    MS --> D{Score ≥ 70%?}
-    D -->|✅ Yes| AP[📝 Submit Application]
-    D -->|❌ No| SG[💡 Show Suggested Jobs]
-    AP --> NT[📧 Email Confirmation]
-    NT --> EN([✅ Application Tracked])
-    SG --> EN2([🔄 Resume Improvements Shown])
+    S([User Uploads Resume]) --> AZ[AI Analyzer]
+    AZ --> MS[Match Score Calculation]
+    MS --> D{Score >= 70%?}
+    D -->|Yes| AP[Submit Application]
+    D -->|No| SG[Show Suggested Jobs]
+    AP --> NT[Email Confirmation]
+    NT --> EN([Application Tracked])
+    SG --> EN2([Resume Improvements Shown])
 
     style S fill:#6366f1,color:#fff
     style AZ fill:#a855f7,color:#fff
@@ -316,19 +314,19 @@ Create a `.env` file at the project root. See `.env.example` for a template.
 
 ```mermaid
 sequenceDiagram
-    participant 🖥️ as Frontend (React)
-    participant ⚙️ as Backend (Django)
-    participant 🗄️ as PostgreSQL
+    participant FE as Frontend (React)
+    participant BE as Backend (Django)
+    participant DB as PostgreSQL
 
-    🖥️->>⚙️: POST /api/auth/login
-    ⚙️->>🗄️: SELECT user WHERE email
-    🗄️-->>⚙️: User record
-    ⚙️-->>🖥️: { access_token, refresh_token }
+    FE->>BE: POST /api/auth/login
+    BE->>DB: SELECT user WHERE email
+    DB-->>BE: User record
+    BE-->>FE: access_token + refresh_token
 
-    🖥️->>⚙️: GET /api/jobs (Authorization: Bearer)
-    ⚙️->>🗄️: SELECT jobs WHERE user_id
-    🗄️-->>⚙️: Jobs list
-    ⚙️-->>🖥️: 200 OK + [ jobs ]
+    FE->>BE: GET /api/jobs (Authorization: Bearer)
+    BE->>DB: SELECT jobs WHERE user_id
+    DB-->>BE: Jobs list
+    BE-->>FE: 200 OK + jobs array
 ```
 
 > 📖 Full OpenAPI spec available at `/api/schema/` when running the backend.
